@@ -14,7 +14,7 @@ class HealthController(
     private val webSocketFacade: WebSocketFacade
 ) {
 
-    @GetMapping("/is-running")
+    @GetMapping("/status")
     fun isRunning(): ResponseEntity<IsRunningResponseEntity> {
         val result = webSocketFacade.status()
         return ResponseEntity.status(HttpStatus.OK).body(result)
