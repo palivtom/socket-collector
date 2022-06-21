@@ -6,6 +6,8 @@ services:
     container_name: socket-collector
     environment:
       output-path: "output-data"
+    ports:
+      - "8080:8080"
     volumes:
       - socket-collector-data:/output-data
 

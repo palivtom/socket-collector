@@ -6,6 +6,7 @@ import cz.palivtom.socketcollector.writer.CsvWriter
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import org.springframework.web.socket.CloseStatus
 import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.WebSocketSession
@@ -35,5 +36,13 @@ class CustomTextWebSocketHandler(
         val decodedPayload = Base64.getDecoder().decode(payload)
         val pricingData = PricingData.parseFrom(decodedPayload)
         csvWriter.saveToFile(pricingData)
+    }
+
+    override fun afterConnectionClosed(session: WebSocketSession, status: CloseStatus) {
+        logger.error { "Connection closed with status code: ${status.code}." }
+    }
+
+    override fun handleTransportError(session: WebSocketSession, exception: Throwable) {
+        logger.error { "Transport error occurs: ${exception.message}" }
     }
 }

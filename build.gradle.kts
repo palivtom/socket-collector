@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 
 	// logging
 	implementation("io.github.microutils:kotlin-logging-jvm:2.1.23")

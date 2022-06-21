@@ -8,7 +8,7 @@ interface WebSocketClientServiceI {
     fun close()
 
     /**
-     * True if WebSocket is not already done or canceled.
+     * True if WebSocket is opened.
      */
     fun isRunning(): Boolean
 }
