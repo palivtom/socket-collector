@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 @Component
 class FileNameUtils {
     companion object {
-        private val dateTimeFormatter = DateTimeFormatter.ofPattern("DDMMyyyy-HHMMSS")
+        private val dateTimeFormatter = DateTimeFormatter.ofPattern("DDMMyyyy-HHmmss")
     }
     private val logger = KotlinLogging.logger {}
 
