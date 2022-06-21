@@ -1,6 +1,6 @@
 package cz.palivtom.socketcollector.controller
 
-import cz.palivtom.socketcollector.facade.WebSocketClientServiceFacade
+import cz.palivtom.socketcollector.facade.WebSocketFacade
 import cz.palivtom.socketcollector.model.response.IsRunningResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/health")
 class HealthController(
-    private val webSocketClientServiceFacade: WebSocketClientServiceFacade
+    private val webSocketFacade: WebSocketFacade
 ) {
 
     @GetMapping("/is-running")
     fun isRunning(): ResponseEntity<IsRunningResponseEntity> {
-        val result = webSocketClientServiceFacade.isRunning()
+        val result = webSocketFacade.isRunning()
         return ResponseEntity.status(HttpStatus.OK).body(result)
     }
 

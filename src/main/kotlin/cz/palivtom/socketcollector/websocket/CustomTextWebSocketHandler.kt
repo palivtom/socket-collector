@@ -1,4 +1,4 @@
-package cz.palivtom.socketcollector.handler
+package cz.palivtom.socketcollector.websocket
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import cz.palivtom.socketcollector.PricingData
@@ -12,11 +12,13 @@ import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.handler.TextWebSocketHandler
 import java.util.Base64
+import org.springframework.context.annotation.Lazy
 
 @Component
 class CustomTextWebSocketHandler(
     private val objectMapper: ObjectMapper,
-    private val csvWriter: CsvWriter
+    private val csvWriter: CsvWriter,
+    @Lazy private val webSocketConnection: WebSocketConnectionI
 ) : TextWebSocketHandler() {
 
     private val logger = KotlinLogging.logger {}
@@ -39,7 +41,9 @@ class CustomTextWebSocketHandler(
     }
 
     override fun afterConnectionClosed(session: WebSocketSession, status: CloseStatus) {
-        logger.error { "Connection closed with status code: ${status.code}." }
+        logger.error { "Connection closed with status code: ${status.code}. Trying to reconnect..." }
+        webSocketConnection.reconnect()
+        Thread.sleep(5000)
     }
 
     override fun handleTransportError(session: WebSocketSession, exception: Throwable) {

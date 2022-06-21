@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import java.io.File
 
-abstract class AbstractWriter {
+abstract class AbstractWriter : Writer {
     protected val logger = KotlinLogging.logger {}
 
     @Autowired
@@ -15,8 +15,6 @@ abstract class AbstractWriter {
 
     @Value("\${output-path}")
     protected lateinit var path: String
-
-    abstract fun saveToFile(pricingData: PricingData)
 
     protected fun getFile(pricingData: PricingData): File {
         val fullPath = "$path/${pricingData.id}"
