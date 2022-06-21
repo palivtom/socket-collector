@@ -10,10 +10,12 @@ class WebSocketFacade(
     private val webSocketClientConnection: WebSocketConnectionI,
     private val fileNameUtils: FileNameUtils
 ) {
-    fun isRunning(): IsRunningResponseEntity {
+    fun status(): IsRunningResponseEntity {
         return IsRunningResponseEntity(
             isRunning = webSocketClientConnection.isRunning(),
-            generatedName = fileNameUtils.name
+            isConnected = webSocketClientConnection.isConnected(),
+            generatedName = fileNameUtils.name,
+
         )
     }
 }

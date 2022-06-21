@@ -21,7 +21,12 @@ interface WebSocketConnectionI {
     fun stop()
 
     /**
-     * Returns true if WebSocket is running.
+     * Returns true if WebSocket is connected.
+     */
+    fun isConnected(): Boolean
+
+    /**
+     * Returns true if WebSocketConnectionManager is running.
      */
     fun isRunning(): Boolean
 }

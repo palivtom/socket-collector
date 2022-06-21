@@ -43,7 +43,6 @@ class CustomTextWebSocketHandler(
     override fun afterConnectionClosed(session: WebSocketSession, status: CloseStatus) {
         logger.error { "Connection closed with status code: ${status.code}. Trying to reconnect..." }
         webSocketConnection.reconnect()
-        Thread.sleep(5000)
     }
 
     override fun handleTransportError(session: WebSocketSession, exception: Throwable) {

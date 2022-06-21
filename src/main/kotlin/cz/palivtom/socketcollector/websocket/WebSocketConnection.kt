@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.socket.WebSocketHandler
 import org.springframework.web.socket.client.WebSocketClient
-import org.springframework.web.socket.client.WebSocketConnectionManager
 import javax.annotation.PostConstruct
 
 @Component
@@ -16,11 +15,11 @@ class WebSocketConnection(
     @Value("\${websocket-client-uri}")
     private lateinit var uriString: String
 
-    private lateinit var manager: WebSocketConnectionManager
+    private lateinit var manager: CustomWebSocketConnectorManager
 
     @PostConstruct
     private fun webSocketConnectionManager() {
-        manager = WebSocketConnectionManager(webSocketClient, customTextWebSocketHandler, uriString)
+        manager = CustomWebSocketConnectorManager(webSocketClient, customTextWebSocketHandler, uriString)
         start()
     }
 
@@ -37,6 +36,10 @@ class WebSocketConnection(
 
     override fun stop() {
         manager.stop()
+    }
+
+    override fun isConnected(): Boolean {
+        return manager.isConnected
     }
 
     override fun isRunning(): Boolean {
