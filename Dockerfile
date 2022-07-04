@@ -6,10 +6,11 @@ RUN apk update && apk upgrade && apk --update add openjdk11 tini && rm -rf /tmp/
 #add user for the application
 RUN addgroup spring && adduser -D -G spring spring
 
+USER spring:spring
+
 # Copy jar and entrypoint shell script into docker image
 ARG JAR_FILE=build/libs/*.jar
-COPY --chown=spring:spring ${JAR_FILE} app.jar
-COPY --chown=spring:spring entrypoint.sh /entrypoint.sh
+COPY ${JAR_FILE} app.jar
+COPY entrypoint.sh /entrypoint.sh
 
-USER spring:spring
 CMD ["/sbin/tini", "/entrypoint.sh"]

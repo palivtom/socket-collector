@@ -2,15 +2,11 @@ version: '3.8'
 
 services:
   socket-collector:
-    build: /
+    build: ./
     container_name: socket-collector
     environment:
       output-path: "output-data"
     ports:
       - "8080:8080"
     volumes:
-      - socket-collector-data:/output-data
-
-volumes:
-  socket-collector-data:
-    external: false
+      - ./docker-output-data:/output-data
