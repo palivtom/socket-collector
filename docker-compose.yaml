@@ -4,6 +4,7 @@ services:
   socket-collector:
     build: ./
     container_name: socket-collector
+    restart: unless-stopped
     environment:
       output-path: "output-data"
     ports:
