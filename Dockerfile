@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-alpine
+FROM openjdk:11
 
 # Copy jar and entrypoint shell script into docker image
 ARG JAR_FILE=build/libs/*.jar
