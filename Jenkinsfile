@@ -11,7 +11,7 @@ pipeline {
                 }
             }
             steps {
-                sh './gradlew clean build'
+                sh './gradlew bootjar'
             }
         }
 
