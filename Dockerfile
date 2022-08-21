@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-# add open JDK 11 and tini
-RUN apk update && apk upgrade && apk --update add openjdk11 tini
+# add open JDK 17 and tini
+RUN apk update && apk upgrade && apk --update add openjdk17 tini
 
 # Copy jar and entrypoint shell script into docker image
 ARG JAR_FILE=build/libs/*.jar

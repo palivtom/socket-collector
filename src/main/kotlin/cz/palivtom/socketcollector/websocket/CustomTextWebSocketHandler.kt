@@ -2,7 +2,7 @@ package cz.palivtom.socketcollector.websocket
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import cz.palivtom.socketcollector.PricingData
-import cz.palivtom.socketcollector.writer.CsvWriter
+import cz.palivtom.socketcollector.events.PricingDataAcceptationPublisher
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Lazy
 @Component
 class CustomTextWebSocketHandler(
     private val objectMapper: ObjectMapper,
-    private val csvWriter: CsvWriter,
-    @Lazy private val webSocketConnection: WebSocketConnectionI
+    @Lazy private val webSocketConnection: WebSocketConnectionI,
+    private val pricingDataAcceptationPublisher: PricingDataAcceptationPublisher
 ) : TextWebSocketHandler() {
 
     private val logger = KotlinLogging.logger {}
@@ -37,7 +37,7 @@ class CustomTextWebSocketHandler(
         val payload = message.payload as String
         val decodedPayload = Base64.getDecoder().decode(payload)
         val pricingData = PricingData.parseFrom(decodedPayload)
-        csvWriter.saveToFile(pricingData)
+        pricingDataAcceptationPublisher.publishCustomEvent(pricingData)
     }
 
     override fun afterConnectionClosed(session: WebSocketSession, status: CloseStatus) {

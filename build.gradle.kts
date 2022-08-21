@@ -12,7 +12,7 @@ plugins {
 
 group = "cz.palivtom"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -20,7 +20,11 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	// database
+	implementation("org.postgresql:postgresql:42.4.2")
 
 	// logging
 	implementation("io.github.microutils:kotlin-logging-jvm:2.1.23")
@@ -29,10 +33,10 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 	// protobuf
-	implementation("com.google.protobuf:protobuf-java:3.21.1")
+	implementation("com.google.protobuf:protobuf-java:3.21.5")
 
 	// grpc
-	implementation("io.grpc:grpc-protobuf:1.47.0")
+	implementation("io.grpc:grpc-protobuf:1.48.0")
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -42,12 +46,12 @@ dependencies {
 
 protobuf {
 	protoc {
-		artifact = "com.google.protobuf:protoc:3.21.1"
+		artifact = "com.google.protobuf:protoc:3.21.5"
 	}
 
 	plugins {
 		id("grpc") {
-			artifact = "io.grpc:protoc-gen-grpc-java:1.47.0"
+			artifact = "io.grpc:protoc-gen-grpc-java:1.48.0"
 		}
 	}
 
@@ -76,7 +80,7 @@ tasks.jar {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "17"
 	}
 }
 
