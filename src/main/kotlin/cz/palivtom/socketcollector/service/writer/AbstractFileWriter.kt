@@ -1,4 +1,4 @@
-package cz.palivtom.socketcollector.writer
+package cz.palivtom.socketcollector.service.writer
 
 import cz.palivtom.socketcollector.PricingData
 import cz.palivtom.socketcollector.utils.FileNameUtils
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import java.io.File
 
-abstract class AbstractWriter : Writer {
+abstract class AbstractFileWriter : FileWriter {
     protected val logger = KotlinLogging.logger {}
 
     @Autowired

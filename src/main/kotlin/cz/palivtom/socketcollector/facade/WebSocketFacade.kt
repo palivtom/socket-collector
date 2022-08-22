@@ -15,7 +15,6 @@ class WebSocketFacade(
             isRunning = webSocketClientConnection.isRunning(),
             isConnected = webSocketClientConnection.isConnected(),
             generatedName = fileNameUtils.name,
-
         )
     }
 }

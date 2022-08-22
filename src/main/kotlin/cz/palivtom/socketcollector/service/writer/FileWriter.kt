@@ -1,11 +1,11 @@
-package cz.palivtom.socketcollector.writer
+package cz.palivtom.socketcollector.service.writer
 
 import cz.palivtom.socketcollector.PricingData
 
 /**
  * Writes collected tickers to files.
  */
-interface Writer {
+interface FileWriter {
 
     /**
      * Saves data to appropriate file.
