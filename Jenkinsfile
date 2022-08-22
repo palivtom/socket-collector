@@ -4,12 +4,11 @@ pipeline {
         stage ('Build') {
             agent {
                 docker {
-                    image 'openjdk:17'
-                    args '-v $PWD:/app'
+                    image 'gradle:jdk17-alpine'
                 }
             }
             steps {
-                sh './gradlew bootjar'
+                sh 'gradlew bootJar'
             }
         }
 
