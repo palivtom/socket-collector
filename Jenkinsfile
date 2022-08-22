@@ -5,6 +5,7 @@ pipeline {
             agent {
                 docker {
                     image 'gradle:jdk17-alpine'
+                    args '-u 0:0'
                 }
             }
             steps {
