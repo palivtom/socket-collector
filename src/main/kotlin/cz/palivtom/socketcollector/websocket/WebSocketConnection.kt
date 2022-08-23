@@ -37,12 +37,4 @@ class WebSocketConnection(
     override fun stop() {
         manager.stop()
     }
-
-    override fun isConnected(): Boolean {
-        return manager.isConnected
-    }
-
-    override fun isRunning(): Boolean {
-        return manager.isRunning
-    }
 }
