@@ -8,9 +8,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew'
-                sh './gradlew bootJar'
+                sh 'sudo chmod +x ./gradlew'
+                sh 'sudo ./gradlew'
+                sh 'sudo ./gradlew bootJar'
             }
         }
 
