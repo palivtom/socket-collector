@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'gradlew bootJar'
+                sh 'gradle bootJar'
             }
         }
 
