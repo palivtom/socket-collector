@@ -1,6 +1,11 @@
 pipeline {
     agent none
     stages {
+        stage ('Permissions') {
+            steps {
+                sh 'chmod +x ./gradlew'
+            }
+        }
         stage ('Build') {
             agent {
                 docker {
@@ -8,9 +13,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo chmod +x ./gradlew'
-                sh 'sudo ./gradlew'
-                sh 'sudo ./gradlew bootJar'
+                sh './gradlew'
+                sh './gradlew bootJar'
             }
         }
 
