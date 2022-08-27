@@ -1,24 +1,19 @@
 pipeline {
     agent none
     stages {
-        stage ('Permissions') {
-            steps {
-                sh 'chmod +x ./gradlew'
-            }
-        }
         stage ('Build') {
             agent {
                 docker {
-                    image 'openjdk:17'
+                    image 'gradle:jdk17'
                 }
             }
             steps {
-                sh './gradlew'
-                sh './gradlew bootJar'
+                sh 'gradlew bootJar'
             }
         }
 
         stage ('Deploy') {
+            agent any
             steps {
                 sh 'docker compose up --build -d'
                 sh 'docker compose ps'
