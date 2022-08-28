@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       ticker_data_save: none
-      spring.datasource.url: jdbc:postgresql://localhost:5432/postgres
+      spring.datasource.url: jdbc:postgresql://host.docker.internal:5432/postgres
       spring_datasource_username: $spring_datasource_username
       spring_datasource_password: $spring_datasource_password
 #    ports:
