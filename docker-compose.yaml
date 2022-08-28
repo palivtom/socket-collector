@@ -5,6 +5,8 @@ services:
     build: ./
     container_name: socket-collector
     restart: unless-stopped
+    extra_hosts:
+      - host.docker.internal:host-gateway
     environment:
       ticker_data_save: none
       spring.datasource.url: jdbc:postgresql://host.docker.internal:5432/postgres
